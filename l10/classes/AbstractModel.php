@@ -1,6 +1,6 @@
 <?php
-
-abstract class AbstractModel
+require_once __DIR__.'/../classes/IModel.php';
+abstract class AbstractModel implements IModel
 {
     protected static $table;
     protected static $class;
