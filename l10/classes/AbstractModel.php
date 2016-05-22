@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../classes/IModel.php';
+require_once __DIR__.'/../classes/ModelException.php';
 abstract class AbstractModel
 {
     protected static $table;
@@ -35,7 +36,12 @@ abstract class AbstractModel
         $db=new DB();
         $db->setClassName($class);
         $sql='SELECT * FROM '.static::$table.' WHERE '.$colums.'=:value';
-        return $db->queryAll($sql, [':value' => $value])[0];
+        $res=$db->queryAll($sql, [':value' => $value])[0];
+        if(empty($res))    // Проверка на пустой запрос
+        {
+            throw New ModelException('Ничго не найденно в базе');    // если поймали пустой то ловим ошибку
+        }
+        return $res;
     }
     
     public static function findOne($id)

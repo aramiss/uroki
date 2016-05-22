@@ -9,8 +9,5 @@ class NewController
     public function actionAll()
     {
         $art= NewsModel::findColum('title','Onoe');
-        $art->title = 'One';
-        $art->save();
-        
     }
 }

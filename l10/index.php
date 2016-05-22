@@ -8,5 +8,13 @@ $controllerClassName = $ctrl.'Controller';
 require_once __DIR__.'/controllers/'.$controllerClassName.'.php';
 $controller = new $controllerClassName;
 $method  = 'action'.$act;
-$controller->$method();
+
+try  //поймали оисключение или нет
+{
+    $controller->$method();
+} catch (ModelException $e)
+{
+    die('Что то не так: '. $e->getMessage()); //если поймали
+}
+
 ?>
